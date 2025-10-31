@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Crimson+Text:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Crimson+Text:ital@0;1&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -15,7 +16,7 @@
         }
 
         body {
-            font-family: 'Crimson Text', serif;
+            font-family: 'Dancing Script', cursive;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -130,15 +131,15 @@
         .subtitle {
             font-family: 'Crimson Text', serif;
             color: #f0f0f0;
-            font-size: 20px;
+            font-size: 25px;
             font-style: italic;
             margin-bottom: 30px;
             letter-spacing: 0.5px;
         }
 
         .emoji {
-            font-size: 60px;
-            margin: 20px 0;
+            font-size: 100px;
+            margin: 10px 0;
             animation: heartbeat 1.5s ease-in-out infinite;
             filter: drop-shadow(0 0 10px rgba(255, 182, 193, 0.6));
         }
@@ -153,7 +154,7 @@
         .message {
             font-family: 'Crimson Text', serif;
             color: #ffffff;
-            font-size: 19px;
+            font-size: 23px;
             line-height: 1.9;
             margin: 25px 0;
             text-align: center;
@@ -193,11 +194,15 @@
             transform: translateY(0);
         }
 
-        .audio-btn::before {
-            content: '♪ ';
-            margin-right: 8px;
-            font-size: 20px;
-        }
+       .audio-btn::before {
+    content: '▶ ';
+    margin-right: 8px;
+    font-size: 28px;
+}
+
+.audio-btn.playing::before {
+    content: '⏸ ';
+}
 
         /* Animación de reproducción */
         .sound-waves {
