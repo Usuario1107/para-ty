@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Ty💕</title>
+    <title>Para Ti Mi Amor 💕</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Crimson+Text:ital@0;1&display=swap" rel="stylesheet">
@@ -27,6 +27,7 @@
             position: relative;
         }
 
+        /* Estrellas en el fondo */
         .stars {
             position: fixed;
             top: 0;
@@ -89,13 +90,15 @@
             z-index: 2;
             max-width: 500px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.98);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             border-radius: 30px;
             padding: 40px 30px;
             box-shadow: 0 25px 70px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 182, 193, 0.3);
             text-align: center;
             animation: fadeInScale 1.2s ease-out;
-            border: 2px solid rgba(255, 182, 193, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
 
         @keyframes fadeInScale {
@@ -111,10 +114,10 @@
 
         h1 {
             font-family: 'Great Vibes', cursive;
-            color: #c94b76;
+            color: #ffffff;
             font-size: 48px;
             margin-bottom: 15px;
-            text-shadow: 2px 2px 8px rgba(201, 75, 118, 0.3);
+            text-shadow: 2px 2px 10px rgba(255, 182, 193, 0.8);
             animation: gentlePulse 3s ease-in-out infinite;
             font-weight: 400;
         }
@@ -126,7 +129,7 @@
 
         .subtitle {
             font-family: 'Crimson Text', serif;
-            color: #666;
+            color: #f0f0f0;
             font-size: 20px;
             font-style: italic;
             margin-bottom: 30px;
@@ -149,7 +152,7 @@
 
         .message {
             font-family: 'Crimson Text', serif;
-            color: #444;
+            color: #ffffff;
             font-size: 19px;
             line-height: 1.9;
             margin: 25px 0;
@@ -267,8 +270,8 @@
         </p>
 
         <div class="buttons">
-            <button class="audio-btn" id="btn1" onclick="playAudio1()">
-                escucha esto
+            <button class="audio-btn" id="btn1" onclick="toggleAudio1()">
+                <span id="text1">Escucha esto mi amor</span>
                 <div class="sound-waves" id="waves1">
                     <div class="wave"></div>
                     <div class="wave"></div>
@@ -276,8 +279,8 @@
                     <div class="wave"></div>
                 </div>
             </button>
-            <button class="audio-btn" id="btn2" onclick="playAudio2()">
-                tambien esto
+            <button class="audio-btn" id="btn2" onclick="toggleAudio2()">
+                <span id="text2">Tengo algo más para ti</span>
                 <div class="sound-waves" id="waves2">
                     <div class="wave"></div>
                     <div class="wave"></div>
@@ -316,6 +319,7 @@
         }
         createStars();
 
+        // Crear corazones flotantes
         function createHeart() {
             const heart = document.createElement('div');
             heart.className = 'heart';
@@ -333,15 +337,17 @@
         }
         setInterval(createHeart, 1200);
 
-   
+        // Variables para controlar reproducción
         const audio1 = document.getElementById('audio1');
         const audio2 = document.getElementById('audio2');
         const btn1 = document.getElementById('btn1');
         const btn2 = document.getElementById('btn2');
         const waves1 = document.getElementById('waves1');
         const waves2 = document.getElementById('waves2');
+        const text1 = document.getElementById('text1');
+        const text2 = document.getElementById('text2');
 
-       
+        // Función para detener todo
         function stopAll() {
             audio1.pause();
             audio2.pause();
@@ -349,40 +355,61 @@
             btn2.classList.remove('playing');
             waves1.classList.remove('active');
             waves2.classList.remove('active');
+            text1.textContent = 'Escucha esto mi amor';
+            text2.textContent = 'Tengo algo más para ti';
         }
 
- 
-        function playAudio1() {
-            stopAll();
-            audio1.currentTime = 0;
-            audio1.play().then(() => {
-                btn1.classList.add('playing');
-                waves1.classList.add('active');
-            }).catch(e => {
-                alert('Toca el botón de nuevo para escuchar 💕');
-            });
+        // Toggle audio 1
+        function toggleAudio1() {
+            if (!audio1.paused) {
+                audio1.pause();
+                btn1.classList.remove('playing');
+                waves1.classList.remove('active');
+                text1.textContent = 'Escucha esto mi amor';
+            } else {
+                stopAll();
+                audio1.currentTime = 0;
+                audio1.play().then(() => {
+                    btn1.classList.add('playing');
+                    waves1.classList.add('active');
+                    text1.textContent = 'Pausar';
+                }).catch(e => {
+                    alert('Toca el botón de nuevo para escuchar 💕');
+                });
+            }
         }
 
-  
-        function playAudio2() {
-            stopAll();
-            audio2.currentTime = 0;
-            audio2.play().then(() => {
-                btn2.classList.add('playing');
-                waves2.classList.add('active');
-            }).catch(e => {
-                alert('Toca el botón de nuevo para escuchar 💕');
-            });
+        // Toggle audio 2
+        function toggleAudio2() {
+            if (!audio2.paused) {
+                audio2.pause();
+                btn2.classList.remove('playing');
+                waves2.classList.remove('active');
+                text2.textContent = 'Tengo algo más para ti';
+            } else {
+                stopAll();
+                audio2.currentTime = 0;
+                audio2.play().then(() => {
+                    btn2.classList.add('playing');
+                    waves2.classList.add('active');
+                    text2.textContent = 'Pausar';
+                }).catch(e => {
+                    alert('Toca el botón de nuevo para escuchar 💕');
+                });
+            }
         }
 
+        // Cuando termina el audio, restaurar estado
         audio1.addEventListener('ended', () => {
             btn1.classList.remove('playing');
             waves1.classList.remove('active');
+            text1.textContent = 'Escucha esto mi amor';
         });
 
         audio2.addEventListener('ended', () => {
             btn2.classList.remove('playing');
             waves2.classList.remove('active');
+            text2.textContent = 'Tengo algo más para ti';
         });
     </script>
 </body>
