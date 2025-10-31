@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Ty💕</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Crimson+Text:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0f0c29;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 40%, #24243e 100%);
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: rgba(255, 182, 193, 0.7);
+            animation: floatHeart 12s infinite;
+            text-shadow: 0 0 10px rgba(255, 182, 193, 0.8);
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 500px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 30px;
+            padding: 40px 30px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 182, 193, 0.3);
+            text-align: center;
+            animation: fadeInScale 1.2s ease-out;
+            border: 2px solid rgba(255, 182, 193, 0.3);
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            color: #c94b76;
+            font-size: 48px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 8px rgba(201, 75, 118, 0.3);
+            animation: gentlePulse 3s ease-in-out infinite;
+            font-weight: 400;
+        }
+
+        @keyframes gentlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+
+        .subtitle {
+            font-family: 'Crimson Text', serif;
+            color: #666;
+            font-size: 20px;
+            font-style: italic;
+            margin-bottom: 30px;
+            letter-spacing: 0.5px;
+        }
+
+        .emoji {
+            font-size: 60px;
+            margin: 20px 0;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(255, 182, 193, 0.6));
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.05); }
+        }
+
+        .message {
+            font-family: 'Crimson Text', serif;
+            color: #444;
+            font-size: 19px;
+            line-height: 1.9;
+            margin: 25px 0;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 35px;
+        }
+
+        .audio-btn {
+            position: relative;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            padding: 18px 30px;
+            font-size: 17px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(245, 87, 108, 0.4);
+            font-weight: 600;
+            font-family: 'Crimson Text', serif;
+            letter-spacing: 0.5px;
+            overflow: hidden;
+        }
+
+        .audio-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(245, 87, 108, 0.6);
+        }
+
+        .audio-btn:active {
+            transform: translateY(0);
+        }
+
+        .audio-btn::before {
+            content: '♪ ';
+            margin-right: 8px;
+            font-size: 20px;
+        }
+
+        /* Animación de reproducción */
+        .sound-waves {
+            display: none;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .sound-waves.active {
+            display: flex;
+            gap: 3px;
+            align-items: center;
+        }
+
+        .wave {
+            width: 3px;
+            height: 15px;
+            background: white;
+            border-radius: 10px;
+            animation: wave 0.8s ease-in-out infinite;
+        }
+
+        .wave:nth-child(1) { animation-delay: 0s; }
+        .wave:nth-child(2) { animation-delay: 0.1s; }
+        .wave:nth-child(3) { animation-delay: 0.2s; }
+        .wave:nth-child(4) { animation-delay: 0.3s; }
+
+        @keyframes wave {
+            0%, 100% { height: 8px; }
+            50% { height: 20px; }
+        }
+
+        .audio-btn.playing {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            animation: playingPulse 1s ease-in-out infinite;
+        }
+
+        @keyframes playingPulse {
+            0%, 100% { box-shadow: 0 5px 20px rgba(245, 87, 108, 0.4); }
+            50% { box-shadow: 0 5px 30px rgba(250, 112, 154, 0.8); }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+            h1 {
+                font-size: 38px;
+            }
+            .message {
+                font-size: 17px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="starsContainer"></div>
+    <div class="hearts-container" id="heartsContainer"></div>
+    
+    <div class="container">
+        <h1>Para Mi Insana Hermosa</h1>
+        <p class="subtitle">La persona más especial de mi vida</p>
+        
+        <div class="emoji">💕</div>
+        
+        <p class="message">
+            No hay pantalla ni frontera que pueda limitar lo que siento por ti. Eres mi pensamiento constante, mi paz, mi locura bonita. Y aunque te extraño, prefiero extrañarte a no tenerte.
+        </p>
+
+        <div class="buttons">
+            <button class="audio-btn" id="btn1" onclick="playAudio1()">
+                escucha esto
+                <div class="sound-waves" id="waves1">
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                </div>
+            </button>
+            <button class="audio-btn" id="btn2" onclick="playAudio2()">
+                tambien esto
+                <div class="sound-waves" id="waves2">
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                </div>
+            </button>
+        </div>
+    </div>
+
+    <audio id="audio1" preload="auto">
+        <source src="audio1.mp3" type="audio/mpeg">
+        <source src="audio1.m4a" type="audio/mp4">
+    </audio>
+    
+    <audio id="audio2" preload="auto">
+        <source src="audio2.mp3" type="audio/mpeg">
+        <source src="audio2.m4a" type="audio/mp4">
+    </audio>
+
+    <script>
+        // Crear estrellas
+        function createStars() {
+            const container = document.getElementById('starsContainer');
+            for(let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 2 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                container.appendChild(star);
+            }
+        }
+        createStars();
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '💕';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 4 + 10) + 's';
+            heart.style.animationDelay = Math.random() * 3 + 's';
+            document.getElementById('heartsContainer').appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 15000);
+        }
+
+        for(let i = 0; i < 12; i++) {
+            createHeart();
+        }
+        setInterval(createHeart, 1200);
+
+   
+        const audio1 = document.getElementById('audio1');
+        const audio2 = document.getElementById('audio2');
+        const btn1 = document.getElementById('btn1');
+        const btn2 = document.getElementById('btn2');
+        const waves1 = document.getElementById('waves1');
+        const waves2 = document.getElementById('waves2');
+
+       
+        function stopAll() {
+            audio1.pause();
+            audio2.pause();
+            btn1.classList.remove('playing');
+            btn2.classList.remove('playing');
+            waves1.classList.remove('active');
+            waves2.classList.remove('active');
+        }
+
+ 
+        function playAudio1() {
+            stopAll();
+            audio1.currentTime = 0;
+            audio1.play().then(() => {
+                btn1.classList.add('playing');
+                waves1.classList.add('active');
+            }).catch(e => {
+                alert('Toca el botón de nuevo para escuchar 💕');
+            });
+        }
+
+  
+        function playAudio2() {
+            stopAll();
+            audio2.currentTime = 0;
+            audio2.play().then(() => {
+                btn2.classList.add('playing');
+                waves2.classList.add('active');
+            }).catch(e => {
+                alert('Toca el botón de nuevo para escuchar 💕');
+            });
+        }
+
+        audio1.addEventListener('ended', () => {
+            btn1.classList.remove('playing');
+            waves1.classList.remove('active');
+        });
+
+        audio2.addEventListener('ended', () => {
+            btn2.classList.remove('playing');
+            waves2.classList.remove('active');
+        });
+    </script>
+</body>
+</html>
